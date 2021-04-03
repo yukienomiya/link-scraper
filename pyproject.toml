@@ -14,6 +14,9 @@ packages = [
   {include = "tests", from = ".", format = "sdist"},
 ]
 
+[tool.poetry.scripts]
+link-scraper = 'link_scraper.cli:run'
+
 [tool.taskipy.tasks]
 lint = "python -m pylint link_scraper tests -v --output-format colorized --disable duplicate-code,bad-continuation --generated-members=torch.*"
 types = "python -m mypy link_scraper tests --ignore-missing-imports"
@@ -22,6 +25,8 @@ test = "python -m pytest --cov=link_scraper tests --verbose"
 
 [tool.poetry.dependencies]
 python = "^3.9"
+requests = "^2.25.1"
+AdvancedHTMLParser = "^9.0.1"
 
 [tool.poetry.dev-dependencies]
 taskipy = "^1.7.0"
