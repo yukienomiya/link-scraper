@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "link-scraper"
+version = "0.1.0"
+description = "The most basic link scraper in the whole world."
+authors = ["yukienomiya <nomiyayukie@gmail.com>"]
+license = "MIT"
+homepage = "https://github.com/yukienomiya/link-scraper#readme"
+repository = "https://github.com/yukienomiya/link-scraper"
+readme = "readme.md"
+keywords = ["link", "scraper"]
+
+packages = [
+  {include = "link_scraper", from = "."},
+  {include = "tests", from = ".", format = "sdist"},
+]
+
+[tool.taskipy.tasks]
+lint = "python -m pylint link_scraper tests -v --output-format colorized --disable duplicate-code,bad-continuation --generated-members=torch.*"
+types = "python -m mypy link_scraper tests --ignore-missing-imports"
+format = "python -m black link_scraper tests"
+test = "python -m pytest --cov=link_scraper tests --verbose"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+taskipy = "^1.7.0"
+black = "^20.8b1"
+pylint = "^2.7.4"
+mypy = "^0.812"
+pytest = "^6.2.2"
+pytest-cov = "^2.11.1"
+pytest-mock = "^3.5.1"
+pytest-sugar = "^0.9.4"
+pytest-describe = "^1.0.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
